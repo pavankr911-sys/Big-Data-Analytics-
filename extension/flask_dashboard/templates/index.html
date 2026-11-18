@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCS714D Big Data Analytics — Energy Dashboard</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <span class="badge">BCS714D Big Data Analytics — Track B Practical Extension</span>
+                <h1>Global Energy Analytics & Transition Dashboard</h1>
+                <p class="subtitle">MongoDB Analytics Pipeline & Interactive Visualization (OWID Energy Dataset 2000–2024)</p>
+            </div>
+            <div class="header-status">
+                <span class="status-dot"></span>
+                <span>MongoDB Connected (localhost:27017)</span>
+            </div>
+        </header>
+
+        <!-- KPI Summary Cards -->
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-icon">📊</div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Cleaned Documents</span>
+                    <h3 id="kpi-total-docs">--</h3>
+                    <span class="kpi-sub">Indexed on (country, year)</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">🌍</div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Countries Covered</span>
+                    <h3 id="kpi-countries">--</h3>
+                    <span class="kpi-sub">Years 2000 – 2024</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">⚡</div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Global 2023 Clean Energy</span>
+                    <h3 id="kpi-renewables">--</h3>
+                    <span class="kpi-sub" id="kpi-penetration">--</span>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">🌱</div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Avg Carbon Intensity</span>
+                    <h3 id="kpi-carbon">--</h3>
+                    <span class="kpi-sub">gCO2eq / kWh (2023)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Grid -->
+        <main class="content-grid">
+            <!-- Left Panel: Interactive Country Explorer -->
+            <section class="card chart-section">
+                <div class="card-header">
+                    <div>
+                        <h2>Country Transition Trajectory</h2>
+                        <p class="card-desc">Time-series tracking total energy, renewables, solar, and wind generation</p>
+                    </div>
+                    <div class="controls">
+                        <label for="country-select">Select Country:</label>
+                        <select id="country-select">
+                            <option value="India" selected>India</option>
+                            <option value="China">China</option>
+                            <option value="United States">United States</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="chart-wrapper">
+                    <canvas id="energyTrendChart"></canvas>
+                </div>
+
+                <div class="chart-wrapper" style="margin-top: 2rem;">
+                    <canvas id="solarWindChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Right Panel: Global Leaders & Carbon Intensity -->
+            <section class="card leader-section">
+                <div class="card-header">
+                    <div>
+                        <h2>Renewable Energy Leaders (2023)</h2>
+                        <p class="card-desc">Top 10 nations by renewable generation volume (TWh)</p>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Country</th>
+                                <th>Renewables (TWh)</th>
+                                <th>Total Energy (TWh)</th>
+                                <th>Carbon Intensity</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaders-tbody">
+                            <tr><td colspan="5" style="text-align:center;">Loading data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="chart-wrapper" style="margin-top: 1.5rem; height: 260px;">
+                    <canvas id="leadersBarChart"></canvas>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <p>BCS714D Big Data Analytics Assignment — Track B Practical Engineering Deliverable</p>
+            <p>Database: <code>energy_analytics</code> | Engine: MongoDB 9.0 + Python Flask REST API</p>
+        </footer>
+    </div>
+
+    <!-- Frontend Script -->
+    <script>
+        let trendChart = null;
+        let solarWindChart = null;
+        let leadersBarChart = null;
+
+        async function fetchKPIs() {
+            try {
+                const res = await fetch('/api/kpis');
+                const data = await res.json();
+                if (data.status === 'success') {
+                    document.getElementById('kpi-total-docs').textContent = data.total_documents.toLocaleString();
+                    document.getElementById('kpi-countries').textContent = data.unique_countries;
+                    document.getElementById('kpi-renewables').textContent = `${data.global_renewables_2023_twh.toLocaleString()} TWh`;
+                    document.getElementById('kpi-penetration').textContent = `${data.global_renewable_penetration_pct}% Penetration`;
+                    document.getElementById('kpi-carbon').textContent = `${data.avg_carbon_intensity_gco2_kwh} gCO2/kWh`;
+                }
+            } catch (err) {
+                console.error("Error fetching KPIs:", err);
+            }
+        }
+
+        async function populateCountries() {
+            try {
+                const res = await fetch('/api/countries');
+                const data = await res.json();
+                if (data.status === 'success') {
+                    const select = document.getElementById('country-select');
+                    const currentVal = select.value;
+                    select.innerHTML = '';
+                    
+                    const defaults = ["India", "China", "United States", "Germany", "Brazil", "United Kingdom", "Japan", "France"];
+                    defaults.forEach(c => {
+                        if (data.countries.includes(c)) {
+                            const opt = document.createElement('option');
+                            opt.value = c;
+                            opt.textContent = c;
+                            if (c === currentVal) opt.selected = true;
+                            select.appendChild(opt);
+                        }
+                    });
+
+                    // Add remaining countries
+                    data.countries.forEach(c => {
+                        if (!defaults.includes(c)) {
+                            const opt = document.createElement('option');
+                            opt.value = c;
+                            opt.textContent = c;
+                            select.appendChild(opt);
+                        }
+                    });
+                }
+            } catch (err) {
+                console.error("Error populating countries:", err);
+            }
+        }
+
+        async function loadCountryData(country) {
+            try {
+                const res = await fetch(`/api/country/${encodeURIComponent(country)}`);
+                const result = await res.json();
+                if (result.status === 'success') {
+                    renderCountryCharts(result.data, country);
+                }
+            } catch (err) {
+                console.error("Error loading country data:", err);
+            }
+        }
+
+        function renderCountryCharts(data, country) {
+            const labels = data.map(d => d.year);
+            const totalEnergy = data.map(d => d.total_energy_twh);
+            const renewables = data.map(d => d.renewables_energy_twh);
+            const solar = data.map(d => d.solar_electricity_twh);
+            const wind = data.map(d => d.wind_electricity_twh);
+            const carbon = data.map(d => d.electricity_carbon_intensity_gco2eq_per_kwh);
+
+            // Chart 1: Total Energy vs Renewables
+            const ctx1 = document.getElementById('energyTrendChart').getContext('2d');
+            if (trendChart) trendChart.destroy();
+            trendChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Total Energy (TWh)',
+                            data: totalEnergy,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Renewables (TWh)',
+                            data: renewables,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                            fill: true,
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: `${country} — Energy Generation Trajectory (2000–2024)` },
+                        tooltip: { mode: 'index', intersect: false }
+                    },
+                    scales: {
+                        y: { title: { display: true, text: 'Terawatt-hours (TWh)' } }
+                    }
+                }
+            });
+
+            // Chart 2: Solar vs Wind Breakdown
+            const ctx2 = document.getElementById('solarWindChart').getContext('2d');
+            if (solarWindChart) solarWindChart.destroy();
+            solarWindChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Solar Electricity (TWh)',
+                            data: solar,
+                            backgroundColor: '#f59e0b'
+                        },
+                        {
+                            label: 'Wind Electricity (TWh)',
+                            data: wind,
+                            backgroundColor: '#06b6d4'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: { display: true, text: `${country} — Solar & Wind Generation Breakdown (2000–2024)` },
+                        tooltip: { mode: 'index', intersect: false }
+                    },
+                    scales: {
+                        x: { stacked: true },
+                        y: { stacked: true, title: { display: true, text: 'Terawatt-hours (TWh)' } }
+                    }
+                }
+            });
+        }
+
+        async function loadTopRenewables() {
+            try {
+                const res = await fetch('/api/top_renewables?year=2023');
+                const result = await res.json();
+                if (result.status === 'success') {
+                    const tbody = document.getElementById('leaders-tbody');
+                    tbody.innerHTML = '';
+                    result.results.forEach((r, idx) => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><strong>${idx + 1}</strong></td>
+                            <td>${r.country} (${r.iso_code})</td>
+                            <td class="num">${r.renewables_energy_twh.toLocaleString()}</td>
+                            <td class="num">${r.total_energy_twh.toLocaleString()}</td>
+                            <td class="num">${r.electricity_carbon_intensity_gco2eq_per_kwh}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+
+                    // Horizontal bar chart for top 10
+                    const ctx = document.getElementById('leadersBarChart').getContext('2d');
+                    if (leadersBarChart) leadersBarChart.destroy();
+                    leadersBarChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: result.results.map(r => r.country),
+                            datasets: [{
+                                label: 'Renewables (TWh)',
+                                data: result.results.map(r => r.renewables_energy_twh),
+                                backgroundColor: '#10b981'
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y',
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false },
+                                title: { display: true, text: 'Top 10 Renewable Producers (2023)' }
+                            }
+                        }
+                    });
+                }
+            } catch (err) {
+                console.error("Error loading top renewables:", err);
+            }
+        }
+
+        document.getElementById('country-select').addEventListener('change', (e) => {
+            loadCountryData(e.target.value);
+        });
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            await fetchKPIs();
+            await populateCountries();
+            await loadCountryData('India');
+            await loadTopRenewables();
+        });
+    </script>
+</body>
+</html>
+

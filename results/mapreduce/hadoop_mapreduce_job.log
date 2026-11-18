@@ -1,0 +1,78 @@
+Using Hadoop Streaming Engine: /content/hadoop-3.3.6/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar
+
+=== Submitting MapReduce Job to Hadoop Engine ===
+2026-10-29 16:09:43,880 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+2026-10-29 16:09:43,996 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+2026-10-29 16:09:43,996 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+2026-10-29 16:09:44,028 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+2026-10-29 16:09:44,430 INFO mapred.FileInputFormat: Total input files to process : 1
+2026-10-29 16:09:44,468 INFO mapreduce.JobSubmitter: number of splits:1
+2026-10-29 16:09:44,818 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local1566939210_0001
+2026-10-29 16:09:44,819 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2026-10-29 16:09:45,323 INFO mapred.LocalDistributedCacheManager: Localized file:/content/mapper.py as file:/tmp/hadoop-root/mapred/local/job_local1566939210_0001_528699d4-7f22-47be-a1c4-20a36f00fa53/mapper.py
+2026-10-29 16:09:45,357 INFO mapred.LocalDistributedCacheManager: Localized file:/content/reducer.py as file:/tmp/hadoop-root/mapred/local/job_local1566939210_0001_77b0bb9a-4311-4310-aa29-d3d33fdc5c5d/reducer.py
+2026-10-29 16:09:45,563 INFO mapreduce.Job: The url to track the job: http://localhost:8080/
+2026-10-29 16:09:45,567 INFO mapred.LocalJobRunner: OutputCommitter set in config null
+2026-10-29 16:09:45,569 INFO mapreduce.Job: Running job: job_local1566939210_0001
+2026-10-29 16:09:45,574 INFO mapred.LocalJobRunner: OutputCommitter is org.apache.hadoop.mapred.FileOutputCommitter
+2026-10-29 16:09:45,587 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+2026-10-29 16:09:45,587 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+2026-10-29 16:09:45,735 INFO mapred.LocalJobRunner: Waiting for map tasks
+2026-10-29 16:09:45,742 INFO mapred.LocalJobRunner: Starting task: attempt_local1566939210_0001_m_000000_0
+2026-10-29 16:09:45,789 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+2026-10-29 16:09:45,790 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+2026-10-29 16:09:45,829 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+2026-10-29 16:09:45,848 INFO mapred.MapTask: Processing split: file:/content/energy_project/input/energy_2000_2024.csv:0+4404826
+2026-10-29 16:09:45,865 INFO mapred.MapTask: numReduceTasks: 1
+2026-10-29 16:09:45,909 INFO mapred.MapTask: (EQUATOR) 0 kvi 26214396(104857584)
+2026-10-29 16:09:45,909 INFO mapred.MapTask: mapreduce.task.io.sort.mb: 100
+2026-10-29 16:09:45,909 INFO mapred.MapTask: soft limit at 83886080
+2026-10-29 16:09:45,909 INFO mapred.MapTask: bufstart = 0; bufvoid = 104857600
+2026-10-29 16:09:45,909 INFO mapred.MapTask: kvstart = 26214396; length = 6553600
+2026-10-29 16:09:45,916 INFO mapred.MapTask: Map output collector class = org.apache.hadoop.mapred.MapTask$MapOutputBuffer
+2026-10-29 16:09:45,930 INFO streaming.PipeMapRed: PipeMapRed exec [/usr/bin/python3, mapper.py]
+2026-10-29 16:09:46,461 INFO mapred.Task: Final Counters for attempt_local1566939210_0001_m_000000_0: Counters: 17
+	File System Counters
+		FILE: Number of bytes read=4584050
+		FILE: Number of bytes written=1053348
+	Map-Reduce Framework
+		Map input records=6325
+		Map output records=6324
+		Map output bytes=249819
+		Map output materialized bytes=262473
+		Spilled Records=6324
+		Total committed heap usage (bytes)=294649856
+	File Input Format Counters 
+		Bytes Read=4439254
+2026-10-29 16:09:46,653 INFO streaming.PipeMapRed: PipeMapRed exec [/usr/bin/python3, reducer.py]
+2026-10-29 16:09:46,821 INFO mapred.Task: Final Counters for attempt_local1566939210_0001_r_000000_0: Counters: 24
+	File System Counters
+		FILE: Number of bytes read=5109028
+		FILE: Number of bytes written=1330881
+	Map-Reduce Framework
+		Reduce input groups=255
+		Reduce shuffle bytes=262473
+		Reduce input records=6324
+		Reduce output records=255
+		Spilled Records=6324
+		Total committed heap usage (bytes)=294649856
+	File Output Format Counters 
+		Bytes Written=15060
+2026-10-29 16:09:47,594 INFO mapreduce.Job: Job job_local1566939210_0001 completed successfully
+2026-10-29 16:09:47,611 INFO mapreduce.Job: Counters: 30
+	File System Counters
+		FILE: Number of bytes read=9693078
+		FILE: Number of bytes written=2384229
+	Map-Reduce Framework
+		Map input records=6325
+		Map output records=6324
+		Reduce input groups=255
+		Reduce input records=6324
+		Reduce output records=255
+		Spilled Records=12648
+	File Input Format Counters 
+		Bytes Read=4439254
+	File Output Format Counters 
+		Bytes Written=15060
+2026-10-29 16:09:47,611 INFO streaming.StreamJob: Output directory: file:///content/energy_project/output_mr
+

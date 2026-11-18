@@ -1,0 +1,33 @@
+=== Genuine Disk Storage Footprint Comparison ===
+TextFile Directory:
+total 284K
+-rw-r--r-- 1 root root 283K Oct 29 16:19 part-m-00000
+
+RCFile Directory:
+total 64K
+-rw-r--r-- 1 root root 63K Oct 29 16:19 000000_0
+64714	/content/energy_project/hive_warehouse/energy_analytics_hive.db/energy_rcfile
+291407	/content/energy_project/hive_warehouse/energy_analytics_hive.db/energy_text
+
+=== Analytical HQL Benchmark Execution Results ===
+! [Query 1A: TextFile Grouped Aggregation]
+Time taken: 6.937 seconds, Fetched: 10 row(s)
+
+! [Query 1B: RCFile Grouped Aggregation]
+Time taken: 2.776 seconds, Fetched: 10 row(s)
+Speedup Factor: 2.50x
+
+! [Query 2A: TextFile Selective Filter]
+Time taken: 0.571 seconds, Fetched: 10 row(s)
+
+! [Query 2B: RCFile Selective Filter]
+Time taken: 0.225 seconds, Fetched: 10 row(s)
+Speedup Factor: 2.54x
+
+! [Query 3A: TextFile Multi-Column Transition]
+Time taken: 1.724 seconds, Fetched: 10 row(s)
+
+! [Query 3B: RCFile Multi-Column Transition]
+Time taken: 1.631 seconds, Fetched: 10 row(s)
+Speedup Factor: 1.06x
+

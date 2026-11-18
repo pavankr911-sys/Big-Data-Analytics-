@@ -1,0 +1,41 @@
+{
+  "dataset": "OWID Energy (2000-2024)",
+  "total_pig_cleaned_records": 5921,
+  "storage_footprint": {
+    "textfile_bytes": 291407,
+    "textfile_kb": 284.58,
+    "rcfile_bytes": 64714,
+    "rcfile_kb": 63.20,
+    "compression_ratio": 4.502,
+    "space_savings_pct": 77.79
+  },
+  "query_benchmarks": [
+    {
+      "query_id": "Query 1: Full-table Scan & Grouped Aggregation",
+      "hql_intent": "COUNT(*), AVG(total), AVG(renewables) GROUP BY country",
+      "textfile_latency_s": 6.937,
+      "rcfile_latency_s": 2.776,
+      "speedup_factor": 2.50,
+      "columns_scanned_text": 8,
+      "columns_scanned_rcfile": 3
+    },
+    {
+      "query_id": "Query 2: Selective Columnar Projection & Filter",
+      "hql_intent": "solar > 10.0 AND year >= 2018 (Reads 4 cols)",
+      "textfile_latency_s": 0.571,
+      "rcfile_latency_s": 0.225,
+      "speedup_factor": 2.54,
+      "columns_scanned_text": 8,
+      "columns_scanned_rcfile": 4
+    },
+    {
+      "query_id": "Query 3: Multi-column Arithmetic Metric & Temporal Trend",
+      "hql_intent": "AVG(carbon), (SUM(renewables)/SUM(total))*100 GROUP BY year",
+      "textfile_latency_s": 1.724,
+      "rcfile_latency_s": 1.631,
+      "speedup_factor": 1.06,
+      "columns_scanned_text": 8,
+      "columns_scanned_rcfile": 6
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+Input(s):
+Successfully read 6325 records from: "/content/energy_2000_2024.csv"
+
+Output(s):
+Successfully stored 5921 records in: "/content/energy_project/pig_cleaned"
+
+Counters:
+Total records written : 5921
+Total bytes written : 0
+Spillable Memory Manager spill count : 0
+Total bags proactively spilled: 0
+Total records proactively spilled: 0
+
+Pig script completed in 7 seconds and 245 milliseconds (7245 ms)
+Schema: country:chararray, year:int, iso_code:chararray, total_energy_twh:double, renewables_energy_twh:double, solar_electricity_twh:double, wind_electricity_twh:double, carbon_intensity:double
+Total Valid Filtered Records: 5921
+

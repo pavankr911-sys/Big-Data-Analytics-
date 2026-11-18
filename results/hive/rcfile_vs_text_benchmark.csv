@@ -1,0 +1,4 @@
+query_id,hql_intent,textfile_latency_s,rcfile_latency_s,speedup_factor,columns_scanned_text,columns_scanned_rcfile
+"Query 1: Full-table Scan & Grouped Aggregation","COUNT(*), AVG(total), AVG(renewables) GROUP BY country",6.937,2.776,2.50,8,3
+"Query 2: Selective Columnar Projection & Filter","solar > 10.0 AND year >= 2018 (Reads 4 cols)",0.571,0.225,2.54,8,4
+"Query 3: Multi-column Arithmetic Metric & Temporal Trend","AVG(carbon), (SUM(renewables)/SUM(total))*100 GROUP BY year",1.724,1.631,1.06,8,6

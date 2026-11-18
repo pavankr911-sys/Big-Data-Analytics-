@@ -1,0 +1,133 @@
+{
+  "timestamp": "2026-10-29T14:19:03.466138",
+  "database": "energy_analytics",
+  "collection": "energy_data_clean",
+  "total_documents": 6324,
+  "index_used": "country_year_idx",
+  "comparison": [
+    {
+      "query_type": "Indexed Query (country_year_idx)",
+      "stage": "FETCH",
+      "index_name": "country_year_idx",
+      "nReturned": 1,
+      "totalDocsExamined": 1,
+      "totalKeysExamined": 1,
+      "executionTimeMillis": 0,
+      "executionSuccess": true
+    },
+    {
+      "query_type": "Collection Scan ($natural COLLSCAN)",
+      "stage": "COLLSCAN",
+      "index_name": "None (COLLSCAN)",
+      "nReturned": 1,
+      "totalDocsExamined": 6324,
+      "totalKeysExamined": 0,
+      "executionTimeMillis": 3,
+      "executionSuccess": true
+    }
+  ],
+  "detailed_indexed_stats": {
+    "executionSuccess": true,
+    "nReturned": 1,
+    "executionTimeMillis": 0,
+    "executionTimeMicros": 213,
+    "totalKeysExamined": 1,
+    "totalDocsExamined": 1,
+    "executionStages": {
+      "isCached": false,
+      "stage": "FETCH",
+      "nReturned": 1,
+      "executionTimeMillisEstimate": 0,
+      "works": 2,
+      "advanced": 1,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "nss": "energy_analytics.energy_data_clean",
+      "docsExamined": 1,
+      "alreadyHasObj": 0,
+      "inputStage": {
+        "stage": "IXSCAN",
+        "nReturned": 1,
+        "executionTimeMillisEstimate": 0,
+        "works": 2,
+        "advanced": 1,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 1,
+        "nss": "energy_analytics.energy_data_clean",
+        "keyPattern": {
+          "country": 1,
+          "year": 1
+        },
+        "indexName": "country_year_idx",
+        "isMultiKey": false,
+        "multiKeyPaths": {
+          "country": [],
+          "year": []
+        },
+        "isUnique": false,
+        "isSparse": false,
+        "isPartial": false,
+        "indexVersion": 2,
+        "direction": "forward",
+        "indexBounds": {
+          "country": [
+            "[\"India\", \"India\"]"
+          ],
+          "year": [
+            "[2023, 2023]"
+          ]
+        },
+        "keysExamined": 1,
+        "seeks": 1,
+        "dupsTested": 0,
+        "dupsDropped": 0,
+        "peakTrackedMemBytes": 0
+      }
+    }
+  },
+  "detailed_scan_stats": {
+    "executionSuccess": true,
+    "nReturned": 1,
+    "executionTimeMillis": 3,
+    "executionTimeMicros": 3778,
+    "totalKeysExamined": 0,
+    "totalDocsExamined": 6324,
+    "executionStages": {
+      "isCached": false,
+      "stage": "COLLSCAN",
+      "filter": {
+        "$and": [
+          {
+            "country": {
+              "$eq": "India"
+            }
+          },
+          {
+            "year": {
+              "$eq": 2023
+            }
+          }
+        ]
+      },
+      "nReturned": 1,
+      "executionTimeMillisEstimate": 4,
+      "works": 6325,
+      "advanced": 1,
+      "needTime": 6323,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "nss": "energy_analytics.energy_data_clean",
+      "direction": "forward",
+      "docsExamined": 6324,
+      "seeks": 0
+    }
+  }
+}

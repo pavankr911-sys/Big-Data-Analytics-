@@ -1,0 +1,554 @@
+{
+  "timestamp": "2026-10-29T14:19:03.466117",
+  "database": "energy_analytics",
+  "collection": "energy_data_clean",
+  "total_documents": 6324,
+  "pipelines_executed": [
+    "decadal_country_trends ($match, $project, $group)",
+    "indicator_unwind ($match, $project, $unwind)",
+    "country_facet_dashboard ($match, $facet)"
+  ],
+  "decadal_country_trends": [
+    {
+      "_id": {
+        "country": "Brazil",
+        "period": "2000-2004"
+      },
+      "avg_total_energy_twh": 1813.2825,
+      "avg_renewables_energy_twh": 403.361472,
+      "avg_solar_twh": 0.0,
+      "avg_wind_twh": 0.041999999999999996,
+      "avg_carbon_intensity": 96.988,
+      "avg_renewable_pct": 22.233802442489306,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "Brazil",
+        "period": "2005-2009"
+      },
+      "avg_total_energy_twh": 2111.30952,
+      "avg_renewables_energy_twh": 535.719104,
+      "avg_solar_twh": 0.0,
+      "avg_wind_twh": 0.682,
+      "avg_carbon_intensity": 97.352,
+      "avg_renewable_pct": 25.30355754152854,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "Brazil",
+        "period": "2010-2014"
+      },
+      "avg_total_energy_twh": 2686.96888,
+      "avg_renewables_energy_twh": 688.8964840000001,
+      "avg_solar_twh": 0.004,
+      "avg_wind_twh": 5.744,
+      "avg_carbon_intensity": 140.606,
+      "avg_renewable_pct": 25.700364137209114,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "Brazil",
+        "period": "2015-2019"
+      },
+      "avg_total_energy_twh": 2800.9249,
+      "avg_renewables_energy_twh": 808.47257,
+      "avg_solar_twh": 2.218,
+      "avg_wind_twh": 40.391999999999996,
+      "avg_carbon_intensity": 154.60999999999999,
+      "avg_renewable_pct": 28.88081010563288,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "Brazil",
+        "period": "2020-2024"
+      },
+      "avg_total_energy_twh": 2870.83008,
+      "avg_renewables_energy_twh": 960.841386,
+      "avg_solar_twh": 35.916,
+      "avg_wind_twh": 83.05199999999999,
+      "avg_carbon_intensity": 121.428,
+      "avg_renewable_pct": 33.430778635142744,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "China",
+        "period": "2000-2004"
+      },
+      "avg_total_energy_twh": 13895.771600000002,
+      "avg_renewables_energy_twh": 296.880596,
+      "avg_solar_twh": 0.048,
+      "avg_wind_twh": 0.8859999999999999,
+      "avg_carbon_intensity": 777.8219999999999,
+      "avg_renewable_pct": 2.1499470065286,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "China",
+        "period": "2005-2009"
+      },
+      "avg_total_energy_twh": 23523.181,
+      "avg_renewables_energy_twh": 575.109296,
+      "avg_solar_twh": 0.142,
+      "avg_wind_twh": 10.37,
+      "avg_carbon_intensity": 770.83,
+      "avg_renewable_pct": 2.42067249466897,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "China",
+        "period": "2010-2014"
+      },
+      "avg_total_energy_twh": 30662.894,
+      "avg_renewables_energy_twh": 1061.9644680000001,
+      "avg_solar_twh": 7.756,
+      "avg_wind_twh": 104.91399999999999,
+      "avg_carbon_intensity": 724.95,
+      "avg_renewable_pct": 3.4403704234189147,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "China",
+        "period": "2015-2019"
+      },
+      "avg_total_energy_twh": 34415.7738,
+      "avg_renewables_energy_twh": 1810.7227599999999,
+      "avg_solar_twh": 124.94200000000001,
+      "avg_wind_twh": 300.43,
+      "avg_carbon_intensity": 644.068,
+      "avg_renewable_pct": 5.241339215067011,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "China",
+        "period": "2020-2024"
+      },
+      "avg_total_energy_twh": 40898.0732,
+      "avg_renewables_energy_twh": 2907.7789000000002,
+      "avg_solar_twh": 487.712,
+      "avg_wind_twh": 753.576,
+      "avg_carbon_intensity": 586.106,
+      "avg_renewable_pct": 7.074950921089744,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "Germany",
+        "period": "2000-2004"
+      },
+      "avg_total_energy_twh": 3980.0171,
+      "avg_renewables_energy_twh": 65.79621879999999,
+      "avg_solar_twh": 0.23399999999999999,
+      "avg_wind_twh": 16.156,
+      "avg_carbon_intensity": 566.596,
+      "avg_renewable_pct": 1.6539551746729324,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "Germany",
+        "period": "2005-2009"
+      },
+      "avg_total_energy_twh": 3845.4011,
+      "avg_renewables_energy_twh": 162.585463,
+      "avg_solar_twh": 3.59,
+      "avg_wind_twh": 36.08,
+      "avg_carbon_intensity": 536.256,
+      "avg_renewable_pct": 4.251597620891589,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "Germany",
+        "period": "2010-2014"
+      },
+      "avg_total_energy_twh": 3654.30026,
+      "avg_renewables_energy_twh": 259.502656,
+      "avg_solar_twh": 24.952,
+      "avg_wind_twh": 50.266,
+      "avg_carbon_intensity": 528.04,
+      "avg_renewable_pct": 7.1152325270611865,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "Germany",
+        "period": "2015-2019"
+      },
+      "avg_total_energy_twh": 3605.0222000000003,
+      "avg_renewables_energy_twh": 353.425932,
+      "avg_solar_twh": 40.788,
+      "avg_wind_twh": 100.414,
+      "avg_carbon_intensity": 463.73199999999997,
+      "avg_renewable_pct": 9.814395130715301,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "Germany",
+        "period": "2020-2024"
+      },
+      "avg_total_energy_twh": 3060.7455600000003,
+      "avg_renewables_energy_twh": 403.892046,
+      "avg_solar_twh": 59.428,
+      "avg_wind_twh": 130.644,
+      "avg_carbon_intensity": 373.858,
+      "avg_renewable_pct": 13.29250550809181,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "India",
+        "period": "2000-2004"
+      },
+      "avg_total_energy_twh": 3789.85346,
+      "avg_renewables_energy_twh": 88.3973968,
+      "avg_solar_twh": 0.014000000000000002,
+      "avg_wind_twh": 2.718,
+      "avg_carbon_intensity": 744.9979999999999,
+      "avg_renewable_pct": 2.32309814590982,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "India",
+        "period": "2005-2009"
+      },
+      "avg_total_energy_twh": 5040.04508,
+      "avg_renewables_energy_twh": 145.97304100000002,
+      "avg_solar_twh": 0.046,
+      "avg_wind_twh": 11.532,
+      "avg_carbon_intensity": 730.5139999999999,
+      "avg_renewable_pct": 2.897005983852929,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "India",
+        "period": "2010-2014"
+      },
+      "avg_total_energy_twh": 6658.5958,
+      "avg_renewables_energy_twh": 208.24296800000002,
+      "avg_solar_twh": 2.2760000000000002,
+      "avg_wind_twh": 26.860000000000003,
+      "avg_carbon_intensity": 737.322,
+      "avg_renewable_pct": 3.118416583919231,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "India",
+        "period": "2015-2019"
+      },
+      "avg_total_energy_twh": 8272.18726,
+      "avg_renewables_energy_twh": 277.22133199999996,
+      "avg_solar_twh": 23.310000000000002,
+      "avg_wind_twh": 50.488,
+      "avg_carbon_intensity": 741.1940000000001,
+      "avg_renewable_pct": 3.3352752076320265,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "India",
+        "period": "2020-2024"
+      },
+      "avg_total_energy_twh": 9606.891599999999,
+      "avg_renewables_energy_twh": 425.05477599999995,
+      "avg_solar_twh": 94.582,
+      "avg_wind_twh": 72.444,
+      "avg_carbon_intensity": 709.7819999999999,
+      "avg_renewable_pct": 4.415523101470133,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "United States",
+        "period": "2000-2004"
+      },
+      "avg_total_energy_twh": 26187.2926,
+      "avg_renewables_energy_twh": 634.7239400000001,
+      "avg_solar_twh": 0.538,
+      "avg_wind_twh": 9.602,
+      "avg_carbon_intensity": 605.37,
+      "avg_renewable_pct": 2.4225172163675004,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "United States",
+        "period": "2005-2009"
+      },
+      "avg_total_energy_twh": 26248.9214,
+      "avg_renewables_energy_twh": 812.49508,
+      "avg_solar_twh": 0.6839999999999999,
+      "avg_wind_twh": 41.62,
+      "avg_carbon_intensity": 590.934,
+      "avg_renewable_pct": 3.1053743263386497,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "United States",
+        "period": "2010-2014"
+      },
+      "avg_total_energy_twh": 25387.5202,
+      "avg_renewables_energy_twh": 1112.04046,
+      "avg_solar_twh": 9.064,
+      "avg_wind_twh": 141.028,
+      "avg_carbon_intensity": 543.3799999999999,
+      "avg_renewable_pct": 4.381283933955902,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "United States",
+        "period": "2015-2019"
+      },
+      "avg_total_energy_twh": 25645.0028,
+      "avg_renewables_energy_twh": 1368.78894,
+      "avg_solar_twh": 74.286,
+      "avg_wind_twh": 248.112,
+      "avg_carbon_intensity": 471.866,
+      "avg_renewable_pct": 5.335750454659343,
+      "record_count": 5
+    },
+    {
+      "_id": {
+        "country": "United States",
+        "period": "2020-2024"
+      },
+      "avg_total_energy_twh": 25131.8298,
+      "avg_renewables_energy_twh": 1652.68786,
+      "avg_solar_twh": 208.58,
+      "avg_wind_twh": 404.696,
+      "avg_carbon_intensity": 404.514,
+      "avg_renewable_pct": 6.570193987738581,
+      "record_count": 5
+    }
+  ],
+  "indicator_unwind_sample": [
+    {
+      "country": "India",
+      "year": 2000,
+      "indicator": "carbon_intensity",
+      "value": 740.04,
+      "unit": "gCO2/kWh"
+    },
+    {
+      "country": "India",
+      "year": 2000,
+      "indicator": "renewables_energy",
+      "value": 84.30293,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2000,
+      "indicator": "solar_electricity",
+      "value": 0.01,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2000,
+      "indicator": "total_energy",
+      "value": 3574.3892,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2000,
+      "indicator": "wind_electricity",
+      "value": 1.58,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2010,
+      "indicator": "carbon_intensity",
+      "value": 739.43,
+      "unit": "gCO2/kWh"
+    },
+    {
+      "country": "India",
+      "year": 2010,
+      "indicator": "renewables_energy",
+      "value": 169.86322,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2010,
+      "indicator": "solar_electricity",
+      "value": 0.11,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2010,
+      "indicator": "total_energy",
+      "value": 6026.387,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2010,
+      "indicator": "wind_electricity",
+      "value": 19.46,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2020,
+      "indicator": "carbon_intensity",
+      "value": 709.06,
+      "unit": "gCO2/kWh"
+    },
+    {
+      "country": "India",
+      "year": 2020,
+      "indicator": "renewables_energy",
+      "value": 357.25073,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2020,
+      "indicator": "solar_electricity",
+      "value": 52.91,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2020,
+      "indicator": "total_energy",
+      "value": 8348.567,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2020,
+      "indicator": "wind_electricity",
+      "value": 60.43,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2023,
+      "indicator": "carbon_intensity",
+      "value": 713.36,
+      "unit": "gCO2/kWh"
+    },
+    {
+      "country": "India",
+      "year": 2023,
+      "indicator": "renewables_energy",
+      "value": 449.17337,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2023,
+      "indicator": "solar_electricity",
+      "value": 115.42,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2023,
+      "indicator": "total_energy",
+      "value": 10292.05,
+      "unit": "TWh"
+    },
+    {
+      "country": "India",
+      "year": 2023,
+      "indicator": "wind_electricity",
+      "value": 82.11,
+      "unit": "TWh"
+    }
+  ],
+  "facet_dashboard": {
+    "top_renewable_producers": [
+      {
+        "country": "China",
+        "iso_code": "CHN",
+        "renewables_energy_twh": 3094.7139,
+        "total_energy_twh": 42800.863
+      },
+      {
+        "country": "United States",
+        "iso_code": "USA",
+        "renewables_energy_twh": 1726.1484,
+        "total_energy_twh": 25322.736
+      },
+      {
+        "country": "Brazil",
+        "iso_code": "BRA",
+        "renewables_energy_twh": 1010.46313,
+        "total_energy_twh": 2937.8506
+      },
+      {
+        "country": "Canada",
+        "iso_code": "CAN",
+        "renewables_energy_twh": 471.19855,
+        "total_energy_twh": 3283.9954
+      },
+      {
+        "country": "India",
+        "iso_code": "IND",
+        "renewables_energy_twh": 449.17337,
+        "total_energy_twh": 10292.05
+      }
+    ],
+    "cleanest_power_grids": [
+      {
+        "country": "Ethiopia",
+        "iso_code": "ETH",
+        "electricity_carbon_intensity_gco2eq_per_kwh": 23.64,
+        "total_energy_twh": 88.31214
+      },
+      {
+        "country": "Costa Rica",
+        "iso_code": "CRI",
+        "electricity_carbon_intensity_gco2eq_per_kwh": 24.74,
+        "total_energy_twh": 50.68968
+      },
+      {
+        "country": "Iceland",
+        "iso_code": "ISL",
+        "electricity_carbon_intensity_gco2eq_per_kwh": 27.76,
+        "total_energy_twh": 86.80217
+      },
+      {
+        "country": "Norway",
+        "iso_code": "NOR",
+        "electricity_carbon_intensity_gco2eq_per_kwh": 30.46,
+        "total_energy_twh": 310.9726
+      },
+      {
+        "country": "Switzerland",
+        "iso_code": "CHE",
+        "electricity_carbon_intensity_gco2eq_per_kwh": 34.82,
+        "total_energy_twh": 261.75272
+      }
+    ],
+    "global_summary_2023": [
+      {
+        "total_countries": 220,
+        "sum_total_energy_twh": 160636.920645361,
+        "sum_renewables_energy_twh": 11777.89549916,
+        "avg_carbon_intensity": 438.36833333333334
+      }
+    ]
+  }
+}
